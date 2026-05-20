@@ -1,0 +1,38 @@
+# Deployment yaml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: i27-user-app
+  #namespace: i27-user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: i27-user-app
+  template:
+    metadata:
+      labels:
+        app: i27-user-app
+    spec:
+      imagePullSecrets:
+        - name: jfrog-secret
+      containers:
+      - name: i27-user-container
+        image: DIT # this image will be replaced by the actual image through shared library method
+        ports:
+        - containerPort: 8232
+---
+# Service yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: i27-user-service
+  #namespace: i27-user
+spec:
+  selector:
+    app: i27-user-app
+  ports:
+  - protocol: TCP
+    port: 80 # port on the service
+    targetPort: 8232 # port on the container
+  type: NodePort
