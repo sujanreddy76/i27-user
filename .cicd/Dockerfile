@@ -1,5 +1,5 @@
 # java based application
-FROM openjdk:18
+FROM openjdk:21
 
 RUN mkdir -p /opt/i27
 
