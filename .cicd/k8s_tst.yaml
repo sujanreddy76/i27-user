@@ -1,35 +1,35 @@
-# Deployment yaml for deploying user micro-service in dev-ns(namespace)
+# Deployment yaml for deploying user micro-service in tst-ns(namespace)
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: i27-user-dev
+  name: i27-user-tst
   labels:
-    app: i27-user-dev
+    app: i27-user-tst
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: i27-user-dev
+      app: i27-user-tst
   template:
     metadata:
       labels:
-        app: i27-user-dev
+        app: i27-user-tst
     spec:
       containers:
-      - name: i27-user-dev
+      - name: i27-user-tst
         image: DIT #Image tag will be replaced by shared library
 ---
-# Service yaml for user micro-service in dev-ns(namespace)
+# Service yaml for user micro-service in tst-ns(namespace)
 apiVersion: v1
 kind: Service
 metadata:
-  name: i27-user-dev
+  name: i27-user-tst
   labels:
-    app: i27-user-dev
+    app: i27-user-tst
 spec:
   type: NodePort
   selector:
-    app: i27-user-dev 
+    app: i27-user-tst 
   ports:
   - port: 8232
     targetPort: 8232
